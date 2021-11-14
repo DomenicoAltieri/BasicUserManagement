@@ -1,4 +1,4 @@
-package com.Domenico.BasicUserManagement;
+package com.Domenico.BasicUserManagement.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.Domenico.BasicUserManagement;
+package com.Domenico.BasicUserManagement.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;

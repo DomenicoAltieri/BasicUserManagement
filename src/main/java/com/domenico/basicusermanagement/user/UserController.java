@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -57,4 +58,20 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/{id}")
+    ResponseEntity<User> updateUserEntry(@PathVariable int id, @RequestBody User updateToUser) {
+        if (userRepository.existsById(id)) {
+            Optional<User> existingUser = userRepository.findById(id);
+            existingUser.get().setFirstName(updateToUser.getFirstName());
+            existingUser.get().setMiddleName(updateToUser.getMiddleName());
+            existingUser.get().setLastName(updateToUser.getLastName());
+            existingUser.get().setEmail(updateToUser.getEmail());
+            existingUser.get().setDateOfBirth(updateToUser.getDateOfBirth());
+            userRepository.save(existingUser.get());
+            return new ResponseEntity<>(existingUser.get(), HttpStatus.CREATED);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 }

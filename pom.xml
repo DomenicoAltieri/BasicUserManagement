@@ -8,10 +8,10 @@
         <version>2.5.7</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.Domenico</groupId>
-    <artifactId>BasicUserManagement</artifactId>
+    <groupId>com.domenico</groupId>
+    <artifactId>basic-user-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BasicUserManagement</name>
+    <name>Basic User Management</name>
     <description>Basic User Management</description>
     <properties>
         <java.version>11</java.version>

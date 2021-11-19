@@ -1,4 +1,4 @@
-package com.Domenico.BasicUserManagement.User;
+package com.domenico.basicusermanagement.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class User {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String firstName;
@@ -17,7 +17,7 @@ public class User {
     private String email;
     private LocalDate dateOfBirth;
 
-    public User () {
+    public User() {
     }
 
     public User(String firstName, String middleName, String lastName, String email, LocalDate dateOfBirth) {

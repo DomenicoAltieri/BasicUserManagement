@@ -1,4 +1,4 @@
-package com.Domenico.BasicUserManagement.User;
+package com.domenico.basicusermanagement.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

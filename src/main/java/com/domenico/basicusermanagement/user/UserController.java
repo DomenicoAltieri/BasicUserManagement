@@ -37,60 +37,44 @@ public class UserController {
 
     @GetMapping
     ResponseEntity<List<User>> displayAllEntries() {
-        try {
-            List<User> Users = userRepository.findAll();
-            if (Users.isEmpty())
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            else {
-                return new ResponseEntity<>(Users, HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        List<User> Users = userRepository.findAll();
+        if (Users.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        else {
+            return new ResponseEntity<>(Users, HttpStatus.OK);
         }
     }
 
     @PostMapping
     ResponseEntity<User> createUserEntry(@RequestBody User newUser) {
-        try {
-            blankStringsToNull(newUser);
-            userRepository.save(newUser);
-            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        blankStringsToNull(newUser);
+        userRepository.save(newUser);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     ResponseEntity<User> updateUserEntry(@PathVariable int id, @RequestBody User updateToUser) {
-        try {
-            if (userRepository.existsById(id)) {
-                blankStringsToNull(updateToUser);
-                Optional<User> existingUser = userRepository.findById(id);
-                existingUser.get().setFirstName(updateToUser.getFirstName());
-                existingUser.get().setMiddleName(updateToUser.getMiddleName());
-                existingUser.get().setLastName(updateToUser.getLastName());
-                existingUser.get().setEmail(updateToUser.getEmail());
-                existingUser.get().setDateOfBirth(updateToUser.getDateOfBirth());
-                userRepository.save(existingUser.get());
-                return new ResponseEntity<>(existingUser.get(), HttpStatus.CREATED);
-            } else
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        if (userRepository.existsById(id)) {
+            blankStringsToNull(updateToUser);
+            Optional<User> existingUser = userRepository.findById(id);
+            existingUser.get().setFirstName(updateToUser.getFirstName());
+            existingUser.get().setMiddleName(updateToUser.getMiddleName());
+            existingUser.get().setLastName(updateToUser.getLastName());
+            existingUser.get().setEmail(updateToUser.getEmail());
+            existingUser.get().setDateOfBirth(updateToUser.getDateOfBirth());
+            userRepository.save(existingUser.get());
+            return new ResponseEntity<>(existingUser.get(), HttpStatus.CREATED);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
     ResponseEntity<HttpStatus> deleteUserEntry(@PathVariable int id) {
-        try {
-            if (userRepository.existsById(id)) {
-                userRepository.deleteById(id);
-                return new ResponseEntity<>(HttpStatus.OK);
-            } else
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     private void blankStringsToNull(User user) {

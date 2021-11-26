@@ -52,6 +52,7 @@ public class UserController {
     @PostMapping
     ResponseEntity<User> createUserEntry(@RequestBody User newUser) {
         try {
+            blankStringsToNull(newUser);
             userRepository.save(newUser);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -63,6 +64,7 @@ public class UserController {
     ResponseEntity<User> updateUserEntry(@PathVariable int id, @RequestBody User updateToUser) {
         try {
             if (userRepository.existsById(id)) {
+                blankStringsToNull(updateToUser);
                 Optional<User> existingUser = userRepository.findById(id);
                 existingUser.get().setFirstName(updateToUser.getFirstName());
                 existingUser.get().setMiddleName(updateToUser.getMiddleName());
@@ -89,6 +91,17 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private void blankStringsToNull(User user) {
+        if (user.getFirstName() != null && user.getFirstName().isBlank())
+            user.setFirstName(null);
+        if (user.getMiddleName() != null && user.getMiddleName().isBlank())
+            user.setMiddleName(null);
+        if (user.getLastName() != null && user.getLastName().isBlank())
+            user.setLastName(null);
+        if (user.getEmail() != null && user.getEmail().isBlank())
+            user.setEmail(null);
     }
 
 }

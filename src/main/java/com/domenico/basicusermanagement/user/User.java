@@ -3,7 +3,7 @@ package com.domenico.basicusermanagement.user;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Table(name = "user")
+@Table(name = "myUser") // can't use table name “user” with H2 database versions included in spring boot 2.7.0 onwards.
 @Entity
 public class User {
 

@@ -20,17 +20,17 @@ public class DatabaseInitialization implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        User Marco = new User("Marco", null, "Toscano", "marco.toscano@outlook.com",
+        User john = new User("John", null, "White", "john.white@outlook.com",
                 LocalDate.of(2010, Month.APRIL, 4));
-        User Donato = new User("Donato", null, "Rossi", "donato.rossi@gmail.com",
+        User stefan = new User("Stefan", null, "Behler", "stefab.behler@gmail.com",
                 LocalDate.of(1979, Month.DECEMBER, 9));
-        User Roberto = new User("Roberto", "Nicola", "Bianchi", "roberto.bianchi@gmail.com",
+        User roberto = new User("Roberto", "Nicola", "Bianchi", "roberto.bianchi@gmail.com",
                 LocalDate.of(1994, Month.AUGUST, 24));
 
         ArrayList<User> initialEntries = new ArrayList<>();
-        initialEntries.add(Marco);
-        initialEntries.add(Donato);
-        initialEntries.add(Roberto);
+        initialEntries.add(john);
+        initialEntries.add(stefan);
+        initialEntries.add(roberto);
         userRepository.saveAll(initialEntries);
     }
 }

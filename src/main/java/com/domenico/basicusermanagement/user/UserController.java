@@ -5,9 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -21,11 +19,11 @@ public class UserController {
 
     @GetMapping
     ResponseEntity<List<User>> displayAllEntries() {
-        List<User> Users = userRepository.findAll();
-        if (Users.isEmpty())
+        List<User> users = userRepository.findAll();
+        if (users.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         else {
-            return new ResponseEntity<>(Users, HttpStatus.OK);
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }
     }
 
